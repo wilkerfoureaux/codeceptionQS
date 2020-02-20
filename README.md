@@ -16,7 +16,28 @@ install php extensions if aren't
 install codeception
 https://codeception.com/quickstart
 
+run
+
+    composer require codeception/module-asserts --dev
+
+if you want to be able to debug and use `$I->pause()` method, run
+
+    composer require hoa/console
+
+
 ## troubleshot
 
-maybe you want to put composer to run in your entire system | bash
+(1) maybe you want to put composer to run in your entire system | bash
 https://stackoverflow.com/a/57528762/6335839
+
+(2) if you want to run
+
+    $ codecept [...args]
+
+follow the same approach from case (1) adding
+
+`alias codecept="php vendor/bin/codecept"`
+
+in your `~/.bash_profile` file
+
+then run `$ source ~/.bash_profile` to get it working
