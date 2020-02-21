@@ -6,8 +6,15 @@
 
 actor: AcceptanceTester
 modules:
-    enabled:
-        - PhpBrowser:
-            url: http://demo.automationtesting.in
-        - \Helper\Acceptance
-    step_decorators: ~
+  enabled:
+    #- PhpBrowser:
+    #    url: http://demo.automationtesting.in
+    - \Helper\Acceptance
+    - WebDriver:
+        url: http://demo.automationtesting.in
+        browser: chrome # or firefox
+        window_size: 1024x768
+        capabilities:
+          goog:chromeOptions:
+            args: ["headless"]
+  step_decorators: ~

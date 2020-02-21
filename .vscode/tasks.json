@@ -2,20 +2,47 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
-    "tasks": [{
-        "label": "codecept run tests",
-        "type": "shell",
-        "group": "test",
-        "command": "php vendor/bin/codecept run --steps"
-    }, {
-        "label": "codecept debug tests",
-        "type": "shell",
-        "group": "test",
-        "command": "php vendor/bin/codecept run --debug"
-    }, {
-        "label": "codecept run",
-        "type": "shell",
-        "group": "test",
-        "command": "php vendor/bin/codecept run"
-    }]
+    "tasks": [
+        {
+            "label": "codecept run tests",
+            "type": "shell",
+            "group": "test",
+            "command": "php vendor/bin/codecept run --steps"
+        },
+        {
+            "label": "codecept debug tests",
+            "type": "shell",
+            "group": "test",
+            "command": "php vendor/bin/codecept run --debug"
+        },
+        {
+            "label": "codecept run",
+            "type": "shell",
+            "group": "test",
+            "command": "php vendor/bin/codecept run"
+        },
+        {
+            "label": "codecept run debug with selenium + chromediver",
+            "type": "shell",
+            "group": "test",
+            "command": "java -Dwebdriver.chrome.driver=$(which ~/chromedriver) -jar ~/selenium-server-standalone-3.141.59.jar & sleep 5 && php vendor/bin/codecept run --debug",
+            "dependsOn": [
+                "codecept build"
+            ],
+            "dependsOrder": "sequence"
+        },
+        {
+            "label": "codecept build",
+            "type": "shell",
+            "group": "build",
+            "command": "php vendor/bin/codecept build"
+        },
+        {
+            "label": "codecept clean",
+            "type": "shell",
+            "group": "none",
+            "command": "php vendor/bin/codecept clean",
+            "problemMatcher": []
+        }
+    ]
 }
