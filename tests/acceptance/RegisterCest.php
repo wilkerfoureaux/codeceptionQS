@@ -29,20 +29,32 @@ class RegisterCest
         $I->fillField('//input[@ng-model="Password"]', 'Abc12345');
         $I->fillField('//input[@ng-model="CPassword"]', 'Abc12345');
 
-        //$I->click('#submitbtn');
-
-        $I->click('//button[@id="submitbtn"]');
+        // $I->click('#submitbtn');
+        // $I->click('//button[@id="submitbtn"]');
+        // $I->executeJS('angular.element("#basicBootstrapForm")[0].submit()');
+        $I->executeJS('angular.element("#basicBootstrapForm").scope().createdata()');
 
         $I->amGoingTo('submit with success and go to web table page');
+
+        $I->waitForElement('/html/head/title');
+
+        echo '\n\n [DEBUG] TITLE: {{{{{' . $I->grabValueFrom('/html/head/title') . '}}}}}';
+
+        $I->waitForElementVisible('/html/body/section/div[1]/div/div[3]/div[1]/div[1]/div[2]/div/div[1]/div/div[1]/div');
+
+        $I->see('Web Table');
 
         /**
          *  codeception stucks here, and even chrome (no headless) shows Web Table page,
          *  the acceptance test continue to get /Register page information.
          */
-        $I->seeCurrentUrlEquals('/WebTable.html');
+
+        // assertEquals('Web Table', $I->executeJS('return document.getElementsByTagName("title")[0].text'));
+        // $I->seeCurrentUrlEquals('/WebTable.html');
         // $I->waitForText('Web Table', 30, '//title');
         // $I->canSeeInTitle('Web Table');
         // assertEquals($I->grabTextFrom('//title'), 'Web Tables', '');
+        // $I->click('//button[@ng-click="pageLastPageClick()"]');
 
         /**
          * you can put some table assert here, but in this example, there is no usability to make a good test

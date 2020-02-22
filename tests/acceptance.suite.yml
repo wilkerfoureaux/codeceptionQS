@@ -16,5 +16,6 @@ modules:
         window_size: 1024x768
         capabilities:
           goog:chromeOptions:
-            args: ["headless"]
+            # args: ["headless","disable-gpu","disable-extensions","no-sandbox"]
+            args: ["disable-gpu","disable-extensions","no-sandbox"]
   step_decorators: ~

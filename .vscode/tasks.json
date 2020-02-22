@@ -2,8 +2,7 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
-    "tasks": [
-        {
+    "tasks": [{
             "label": "codecept run tests",
             "type": "shell",
             "group": "test",
@@ -25,23 +24,51 @@
             "label": "codecept run debug with selenium + chromediver",
             "type": "shell",
             "group": "test",
-            "command": "java -Dwebdriver.chrome.driver=$(which ~/chromedriver) -jar ~/selenium-server-standalone-3.141.59.jar & sleep 5 && php vendor/bin/codecept run --debug",
+            "command": "java -Dwebdriver.chrome.driver=$(which ~/chromedriver) -jar ~/selenium-server-standalone-3.141.59.jar & sleep 5 && php vendor/bin/codecept run --debug -vvv",
             "dependsOn": [
                 "codecept build"
             ],
-            "dependsOrder": "sequence"
+            "dependsOrder": "sequence",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": true
+            }
         },
         {
             "label": "codecept build",
             "type": "shell",
             "group": "build",
-            "command": "php vendor/bin/codecept build"
+            "command": "php vendor/bin/codecept build",
+            "problemMatcher": []
         },
         {
             "label": "codecept clean",
             "type": "shell",
             "group": "none",
             "command": "php vendor/bin/codecept clean",
+            "problemMatcher": []
+        },
+        {
+            "label": "codecept clean & build",
+            "type": "shell",
+            "group": "build",
+            "command": "clear && exit",
+            "dependsOn": ["codecept clean", "codecept build"],
+            "dependsOrder": "sequence",
+            "promptOnClose": false,
+            "isBackground": true,
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
             "problemMatcher": []
         }
     ]
